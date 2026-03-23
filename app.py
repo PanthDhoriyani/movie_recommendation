@@ -3,22 +3,26 @@ import pickle
 import pandas as pd
 import requests
 
-# Set page layout
+
 st.set_page_config(page_title="Movie Recommender", layout="wide")
 
-# Load data
-movies = pickle.load(open("df_new.pkl", "rb"))
-similarity = pickle.load(open("similarity.pkl", "rb"))
+### header
+col1, col2 = st.columns([1, 6])
+with col1:
+    st.write("#### ->Panth-D")
+with col2:
+    st.title("🎬 Movie Recommendation System")
 
-# Add your TMDB API key
-API_KEY = "1ea05e7ba484cbde0bd820a33ca91721"
-
-# App title
-st.title("🎬 Movie Recommendation System")
 st.write("Find movies similar to your favorite ones")
 
 
-# Function to fetch poster using TMDB API
+movies = pickle.load(open("df_new.pkl", "rb"))
+similarity = pickle.load(open("similarity.pkl", "rb"))
+
+
+API_KEY = "1ea05e7ba484cbde0bd820a33ca91721"
+
+##image
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
     data = requests.get(url).json()
@@ -28,8 +32,7 @@ def fetch_poster(movie_id):
         return "https://image.tmdb.org/t/p/w500/" + poster_path
     return None
 
-
-# Function to recommend movies
+###model
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
@@ -48,18 +51,17 @@ def recommend(movie):
 
     return names, posters
 
-
-# Sidebar info
+###side-slider
 st.sidebar.header("Options")
 st.sidebar.write("Select a movie to get recommendations")
 
-# Movie selection
+##select
 selected_movie = st.selectbox(
     "Select a movie",
     movies['title'].values
 )
 
-# Button click
+
 if st.button("Recommend"):
     with st.spinner("Loading recommendations..."):
         names, posters = recommend(selected_movie)
