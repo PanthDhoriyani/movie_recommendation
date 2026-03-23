@@ -24,5 +24,3 @@ link dataset--"https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata"
 ## ▶️ How to Run
 streamlit run app.py
 
-## 📊 Dataset
-Link: (your dataset link)
