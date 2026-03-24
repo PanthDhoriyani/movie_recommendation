@@ -2,7 +2,9 @@
 
 ## 📌 Overview
 This fun project recommends movies based on similarity using NLP techniques.
+
 link dataset--https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata
+
 deployed->url->https://movierecommendation-vfk3cs2cbbhxqggl9pfbbw.streamlit.app/
 
 ## ⚙️ Tech Stack
